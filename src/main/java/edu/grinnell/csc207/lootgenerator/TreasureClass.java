@@ -6,6 +6,7 @@ package edu.grinnell.csc207.lootgenerator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -69,22 +70,49 @@ public class TreasureClass {
 
     }
 
-    private String[] getOptionsH(String name, TreasureEntry cur, String[] exists) {
-
+    private String[] getOptionsH (String name, String[] opts, TreasureEntry cur) {
+        if(cur.TC.equals(name)){
+            opts = cur.options;
+        }
         if (cur == null) {
-            return null;
-        } else if (name.equals(cur.TC)) {
-            return getOptionsH(name, cur.left, cur.options);
-        } else if (name.equals(cur.TC)) {
-            return getOptionsH(name, cur.right, cur.options);
+            return opts;
+        } else if (name.compareTo(cur.TC) < 0) {
+            return getOptionsH(name, opts, cur.left);
+        } else if (name.compareTo(cur.TC) > 0) {
+            return getOptionsH(name, opts, cur.right);
         } else {
-            return exists;
+            return opts;
         }
     }
 
-    public String[] getOptions(String name) {
-        return getOptionsH(name, start, null);
+
+    public String[] getOptions (String name) { 
+        if(!containsTC(name)){
+             throw new IllegalStateException("The program has? Broken? Sorry buddy no more killing today.");
+        }
+        return getOptionsH(name, null, start); 
     }
+
+    
+    private boolean containsTCH(String name, TreasureEntry cur) {
+        if (name.equals(cur.TC)) {
+            return true;
+        } else if((name.compareTo(cur.TC) < 0 && cur.left == null) ||
+                   name.compareTo(cur.TC) > 0 && cur.right == null ){
+            return false;
+        }
+        else if (name.compareTo(cur.TC) < 0) {
+            return containsTCH(name, cur.left);
+        } else {
+            return containsTCH(name, cur.right);
+        }
+    }
+
+    public boolean containsTC(String name) {
+        return containsTCH(name, start);
+    }
+    
+    
 
     private TreasureEntry putH(String name, String[] options, TreasureEntry cur) {
         if (cur == null) {
@@ -161,5 +189,18 @@ public class TreasureClass {
         }
         return buf;
     }
+    
+    public String selectLoot(String lootClass){
+        String[] coolStuff = getOptions(lootClass);
+        Random whichLoot = new Random();
+        int treasure = whichLoot.nextInt(3);
+        if(containsTC(coolStuff[treasure])){
+           return selectLoot(coolStuff[treasure]);
+        }
+        
+        return coolStuff[treasure];
+        
+    }
+    
 
 }

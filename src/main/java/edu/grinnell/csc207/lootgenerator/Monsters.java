@@ -17,8 +17,8 @@ public class Monsters {
 
     public static class Monster {
 
-        String monClass;
-        String monType;
+        private String monClass;
+        private String monType;
         int monLevel;
         String monTreasureClass;
 
@@ -27,6 +27,10 @@ public class Monsters {
             this.monType = monType;
             this.monLevel = monLevel;
             this.monTreasureClass = monTreasureClass;
+        }
+        
+        public String getMonTreasureClass(){
+            return this.monTreasureClass;
         }
         
         @Override
@@ -81,7 +85,7 @@ public class Monsters {
 
     public Monster getMonster() {
         Random monsterEncounter = new Random();
-        int jumpScare = monsterEncounter.nextInt(48);
+        int jumpScare = monsterEncounter.nextInt(49);
         return monArr[jumpScare];
     }
 

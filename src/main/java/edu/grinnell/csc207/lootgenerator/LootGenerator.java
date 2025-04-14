@@ -13,8 +13,11 @@ public class LootGenerator {
         Monster Paul = Pauls.getMonster();
         System.out.println(Paul.toStringGood());
         TreasureClass Hoard = new TreasureClass();
+        String Loot = Hoard.selectLoot(Paul.getMonTreasureClass());
+        
         //System.out.println("Fighting " + Paul.toString() + "...");
         //System.out.println("You have slain " + Paul.toString() + "!");
         //System.out.println(Paul.toString() + " dropped:");
+        System.out.println("\n" + Loot);
     }
 }
