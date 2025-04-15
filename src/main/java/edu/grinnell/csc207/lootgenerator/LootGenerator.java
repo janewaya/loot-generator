@@ -9,10 +9,11 @@ import java.util.Scanner;
 public class LootGenerator {
 
     /**
-     * The path to the dataset (either the small or large set).
+     * Runs the loot generator program; Takes in user input to generate a
+     * progression from monster to loot to how good the loot is.
+     *
+     * @param String[] args Optional (unused) command line input
      */
-    private static final String DATA_SET = "data/small";
-
     public static void main(String[] args) throws FileNotFoundException {
 
         System.out.println("Welcome to the loot generator of your dreams");
@@ -99,6 +100,12 @@ public class LootGenerator {
         }
     }
 
+    /**
+     * Random selects a monster from the previously stored array of monster
+     * objects
+     *
+     * @return Monster - returns the monster the user is killing
+     */
     public static Monster pickMonster() throws FileNotFoundException {
         Monsters Buddies = new Monsters();
         Random monsterEncounter = new Random();
@@ -106,11 +113,23 @@ public class LootGenerator {
         return Buddies.monArr[jumpScare];
     }
 
+    /**
+     * Outputs the Treasure Class of the object we shall be selecting
+     *
+     * @param friend - Takes in the Monster one is killing
+     * @return String - Returns the stored TC of the Monster
+     */
     public static String fetchTreasureClass(Monster friend) throws FileNotFoundException {
         String Loot = friend.getMonTreasureClass();
         return Loot;
     }
 
+    /**
+     * Outputs a loot item of specified lootClass
+     *
+     * @param lootClass - Takes in the TC of the loot to select
+     * @return String - Returns the name of the looted object
+     */
     public static String generateBaseItem(String lootClass) throws FileNotFoundException {
         TreasureClass Hoard = new TreasureClass();
         String[] coolStuff = Hoard.getOptions(lootClass);
@@ -124,6 +143,12 @@ public class LootGenerator {
 
     }
 
+    /**
+     * Outputs a loot item of specified lootClass
+     *
+     * @param Loot - Takes in the looted object
+     * @return int - Returns the defense level of the looted object
+     */
     public static int generateBaseStats(String Loot) throws FileNotFoundException {
         Armory deathUponYeWhoSteal = new Armory();
         int index = Math.abs(Loot.hashCode() % 202);
@@ -136,6 +161,13 @@ public class LootGenerator {
         return deathUponYeWhoSteal.allArmor[index].getDefVal();
     }
 
+    /**
+     * Outputs the Magic specification of the item
+     *
+     * @param type - determines if it's selecting a Suffix or Prefix
+     * @return Magic - Returns an object containing the specifications of the
+     * Suffix or Prefix.
+     */
     public static Magic generateAffix(String type) throws FileNotFoundException {
         MagicOptions Abracadabra = new MagicOptions();
         if (type.equals("Suffix")) {

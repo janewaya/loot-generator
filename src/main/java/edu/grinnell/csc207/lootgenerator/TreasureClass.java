@@ -14,6 +14,10 @@ import java.util.Scanner;
  */
 public class TreasureClass {
 
+    /**
+     * A class that allows the storing of TreasureEntries.
+     *
+     */
     public static class TreasureEntry {
 
         String TC;
@@ -21,6 +25,16 @@ public class TreasureClass {
         TreasureEntry right;
         TreasureEntry left;
 
+        /**
+         * The TreasureEntry Object
+         *
+         *
+         * @param TC - The Treasure Class of the object
+         * @param options - An array storing the three possible objects within
+         * the TC
+         * @param right - The right node
+         * @param left - the left node
+         */
         public TreasureEntry(String TC, String[] options, TreasureEntry right, TreasureEntry left) {
             TC = this.TC;
             options = this.options;
@@ -28,6 +42,15 @@ public class TreasureClass {
             left = this.left;
         }
 
+        /**
+         * The TreasureEntry Object (Saves time when right and left aren't yet
+         * created)
+         *
+         *
+         * @param TC - The Treasure Class of the object
+         * @param options - An array storing the three possible objects within
+         * the TC
+         */
         public TreasureEntry(String TC, String[] options) {
             this.TC = TC;
             this.options = options;
@@ -38,6 +61,11 @@ public class TreasureClass {
 
     private TreasureEntry start;
 
+    /**
+     * A tree of TreasureEntry objects
+     *
+     *
+     */
     public TreasureClass() throws FileNotFoundException {
         start = null;
 
@@ -69,6 +97,15 @@ public class TreasureClass {
 
     }
 
+    /**
+     * Helps getOptions to return the array of three objects
+     *
+     *
+     * @param name - The TC for which we are finding possible options
+     * @param opts - The found options
+     * @param cur - The current node of the tree
+     * @return String[] - The options tied to the given TC
+     */
     private String[] getOptionsH(String name, String[] opts, TreasureEntry cur) {
         if (cur.TC.equals(name)) {
             opts = cur.options;
@@ -84,13 +121,28 @@ public class TreasureClass {
         }
     }
 
+    /**
+     * Returns the array of three objects attached to a given TC
+     *
+     *
+     * @param name - The TC for which we are finding possible options
+     * @return String[] The options tied to the given string
+     */
     public String[] getOptions(String name) {
         if (!containsTC(name)) {
-            throw new IllegalStateException("The program has? Broken? Sorry buddy no more killing today.");
+            throw new IllegalStateException("The program has broken. Sorry buddy no more killing today.");
         }
         return getOptionsH(name, null, start);
     }
 
+    /**
+     * Helps to determine if the given name is a TC
+     *
+     *
+     * @param name - The TC we are determining the existence of
+     * @param cur - The current node of the tree
+     * @return boolean - true if name is a TC
+     */
     private boolean containsTCH(String name, TreasureEntry cur) {
         if (name.equals(cur.TC)) {
             return true;
@@ -104,10 +156,26 @@ public class TreasureClass {
         }
     }
 
+    /**
+     * Determines if the given name is a TC
+     *
+     *
+     * @param name - The TC we are determining the existence of
+     * @return boolean - true if name is a TC
+     */
     public boolean containsTC(String name) {
         return containsTCH(name, start);
     }
 
+    /**
+     * Finds the TreasureEntry to add to the tree
+     *
+     *
+     * @param name - The name of the TE we're adding
+     * @param options - The options of the TE we're adding
+     * @param cur - The current node of the tree
+     * @return TreasureEntry - The TreasureEntry to be added to the tree
+     */
     private TreasureEntry putH(String name, String[] options, TreasureEntry cur) {
         if (cur == null) {
             return new TreasureEntry(name, options);
@@ -119,6 +187,13 @@ public class TreasureClass {
         return cur;
     }
 
+    /**
+     * Adds a TreasureEntry to the tree
+     *
+     *
+     * @param name - The name of the TE we're adding
+     * @param options - The options of the TE we're adding
+     */
     public void put(String name, String[] options) {
         start = putH(name, options, start);
     }

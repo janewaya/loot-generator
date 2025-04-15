@@ -14,6 +14,10 @@ import java.util.Scanner;
  */
 public class Monsters {
 
+    /**
+     * A class that stores the Monster object
+     *
+     */
     public static class Monster {
 
         private String monClass;
@@ -21,6 +25,14 @@ public class Monsters {
         int monLevel;
         String monTreasureClass;
 
+        /**
+         * The Monster Object
+         *
+         * @param monClass The class of the Monster
+         * @param monType The Type of Monster (Unnecessary)
+         * @param monLevel The level of the Monster (Unnecessary)
+         * @param monTreasureClass The TC of the Monster
+         */
         public Monster(String monClass, String monType, int monLevel, String monTreasureClass) {
             this.monClass = monClass;
             this.monType = monType;
@@ -28,27 +40,33 @@ public class Monsters {
             this.monTreasureClass = monTreasureClass;
         }
 
+        /**
+         * Returns the Treasure Class of the Monster
+         *
+         * @return String - Returns the TC of the Monster
+         */
         public String getMonTreasureClass() {
             return this.monTreasureClass;
         }
 
+        /**
+         * Returns the Class of the Monster
+         *
+         * @return String - Returns the class of the Monster
+         */
         @Override
         public String toString() {
             String quakeInFear = this.monClass;
-            return quakeInFear;
-        }
-
-        public String toStringGood() {
-            String quakeInFear = "Name: " + this.monClass
-                    + "\nType: " + this.monType
-                    + "\nLevel: " + this.monLevel
-                    + "\nTreasureClass: " + this.monTreasureClass;
             return quakeInFear;
         }
     }
 
     Monster[] monArr;
 
+    /**
+     * Creates an array of Monster Objects from monstats.txt
+     *
+     */
     public Monsters() throws FileNotFoundException {
         this.monArr = new Monster[49];
 
