@@ -53,8 +53,8 @@ public class MagicOptions {
         }
     }
 
-    private Magic[] MagicSuffixces;
-    private Magic[] MagicPrefixces;
+    public Magic[] MagicSuffixces;
+    public Magic[] MagicPrefixces;
 
     public MagicOptions() throws FileNotFoundException {
         Random magExists = new Random();
@@ -76,7 +76,7 @@ public class MagicOptions {
         Scanner magSc = new Scanner(new File(path));
         String magInfo;
         int len;
-        if(path == "MagicPrefix.txt"){
+        if (path.equals("MagicPrefix.txt")) {
             len = 372;
         } else {
             len = 386;
@@ -111,23 +111,4 @@ public class MagicOptions {
             }
         }
     }
-
-    public Magic getSuffix() {
-        if (this.MagicSuffixces != null) {
-            Random suffix = new Random();
-            int newSuf = suffix.nextInt(386);
-            return this.MagicSuffixces[newSuf];
-        }
-        return null;
-    }
-
-    public Magic getPrefix() {
-        if (this.MagicPrefixces != null) {
-            Random prefix = new Random();
-            int newPre = prefix.nextInt(372);
-            return MagicPrefixces[newPre];
-        }
-        return null;
-    }
-
 }

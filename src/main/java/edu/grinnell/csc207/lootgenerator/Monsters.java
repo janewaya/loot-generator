@@ -6,7 +6,6 @@ package edu.grinnell.csc207.lootgenerator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -28,11 +27,11 @@ public class Monsters {
             this.monLevel = monLevel;
             this.monTreasureClass = monTreasureClass;
         }
-        
-        public String getMonTreasureClass(){
+
+        public String getMonTreasureClass() {
             return this.monTreasureClass;
         }
-        
+
         @Override
         public String toString() {
             String quakeInFear = this.monClass;
@@ -64,7 +63,7 @@ public class Monsters {
             String findMonTreasureClass = "";
             int index = monInfo.indexOf((char) 9);
             for (int j = 0; j < 4; j++) {
-                
+
                 if (j == 0) {
                     findMonClass = monInfo.substring(0, index);
                 } else if (j == 1) {
@@ -81,12 +80,6 @@ public class Monsters {
             this.monArr[i] = cur;
         }
 
-    }
-
-    public Monster getMonster() {
-        Random monsterEncounter = new Random();
-        int jumpScare = monsterEncounter.nextInt(49);
-        return monArr[jumpScare];
     }
 
 }
