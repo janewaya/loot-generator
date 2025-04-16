@@ -15,12 +15,24 @@ import java.util.Scanner;
  */
 public class MagicOptions {
 
+    /**
+     * Allows for the creation of a Magic object
+     *
+     */
     public static class Magic {
 
         private String name;
         private String magCode;
         private int magVal;
 
+        /**
+         * Creates a magic object
+         *
+         * @param name - The name of the Attribute
+         * @param magCode - The type of Magic
+         * @param magMin - The min possible value
+         * @param magMax - the max possible value
+         */
         public Magic(String name, String magCode, int magMin, int magMax) {
             this.name = name;
             this.magCode = magCode;
@@ -32,30 +44,41 @@ public class MagicOptions {
             }
         }
 
+        /**
+         * Returns the name of the magic object
+         *
+         * @return String - Returns the name of the object
+         */
         public String getName() {
             return this.name;
         }
 
+        /**
+         * Returns the attribute of the magic object
+         *
+         * @return String - Returns the attribute of the object
+         */
         public String getMagCode() {
             return this.magCode;
         }
 
+        /**
+         * Returns the value of the magic object
+         *
+         * @return int - Returns the value of the object
+         */
         public int getMagVal() {
             return this.magVal;
-        }
-
-        @Override
-        public String toString() {
-            String oooohMagic = "Name: " + this.name
-                    + "\nCode: " + this.magCode
-                    + "\nValue: " + this.magVal;
-            return oooohMagic;
         }
     }
 
     public Magic[] MagicSuffixces;
     public Magic[] MagicPrefixces;
 
+    /**
+     * Creates an object storing between 0 and 2 arrays of magic objects
+     *
+     */
     public MagicOptions() throws FileNotFoundException {
         Random magExists = new Random();
         if (magExists.nextInt(2) == 1) {
@@ -72,6 +95,11 @@ public class MagicOptions {
         }
     }
 
+    /**
+     * Stores appropriate magic objects within the created array using
+     * MagicPrefix.txt and MagicSuffix.txt
+     *
+     */
     public void magicArrCreator(String path) throws FileNotFoundException {
         Scanner magSc = new Scanner(new File(path));
         String magInfo;

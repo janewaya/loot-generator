@@ -15,11 +15,22 @@ import java.util.Scanner;
  */
 public class Armory {
 
+    /**
+     * Creates an Armor class, allowing for Armor objects to be created
+     *
+     */
     public static class Armor {
 
         private String name;
         private int defenseValue;
 
+        /**
+         * Creates an armor object
+         *
+         * @param name - The name of the armor
+         * @param minVal - The lowest possible defense value
+         * @param maxVal - The maximum possible defense value
+         */
         public Armor(String name, int minVal, int maxVal) {
             this.name = name;
             if (minVal != maxVal) {
@@ -30,10 +41,20 @@ public class Armory {
             }
         }
 
+        /**
+         * Returns the name of the armor object
+         *
+         * @return String - Returns the name of the object
+         */
         public String getName() {
             return this.name;
         }
 
+        /**
+         * Returns the defense value of the armor object
+         *
+         * @return int - Returns the defense value of the object
+         */
         public int getDefVal() {
             return this.defenseValue;
         }
@@ -41,6 +62,10 @@ public class Armory {
 
     public Armor[] allArmor;
 
+    /**
+     * Creates an object that contains a HashMap which stores armor objects
+     *
+     */
     public Armory() throws FileNotFoundException {
         allArmor = new Armor[202];
 
@@ -69,6 +94,13 @@ public class Armory {
         }
     }
 
+    /**
+     * Adds an armor object to the HashMap in the Armory object
+     *
+     * @param name - The name of the object to be stored
+     * @param minVal - The minimum defense value of the object to be stored
+     * @param maxVal - The maximum defense value of the object to be stored
+     */
     public void put(String name, int minVal, int maxVal) {
         int index = Math.abs(name.hashCode() % 202);
         if (allArmor[index] == null) {
