@@ -110,7 +110,7 @@ public class LootGenerator {
         Monsters Buddies = new Monsters();
         Random monsterEncounter = new Random();
         int jumpScare = monsterEncounter.nextInt(49);
-        return Buddies.monArr[jumpScare];
+        return Buddies.monArr.get(jumpScare);
     }
 
     /**
@@ -174,14 +174,14 @@ public class LootGenerator {
             if (Abracadabra.MagicSuffixces != null) {
                 Random suffix = new Random();
                 int newSuf = suffix.nextInt(386);
-                return Abracadabra.MagicSuffixces[newSuf];
+                return Abracadabra.MagicSuffixces.get(newSuf);
             }
             return null;
         } else {
             if (Abracadabra.MagicPrefixces != null) {
                 Random prefix = new Random();
                 int newPre = prefix.nextInt(372);
-                return Abracadabra.MagicPrefixces[newPre];
+                return Abracadabra.MagicPrefixces.get(newPre);
             }
             return null;
         }

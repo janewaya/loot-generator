@@ -57,9 +57,20 @@ public class TreasureClass {
             this.right = null;
             this.left = null;
         }
+
+        /**
+         * Returns the TC
+         *
+         *
+         * @param cur - The point at which we get the name returned
+         * @return String - The name of the TC
+         */
+        public String printName(TreasureEntry cur) {
+            return cur.TC;
+        }
     }
 
-    private TreasureEntry start;
+    public TreasureEntry start;
 
     /**
      * A tree of TreasureEntry objects

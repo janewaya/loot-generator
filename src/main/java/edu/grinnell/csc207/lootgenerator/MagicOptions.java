@@ -6,6 +6,7 @@ package edu.grinnell.csc207.lootgenerator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -72,8 +73,8 @@ public class MagicOptions {
         }
     }
 
-    public Magic[] MagicSuffixces;
-    public Magic[] MagicPrefixces;
+    public ArrayList<Magic> MagicSuffixces;
+    public ArrayList<Magic> MagicPrefixces;
 
     /**
      * Creates an object storing between 0 and 2 arrays of magic objects
@@ -82,13 +83,13 @@ public class MagicOptions {
     public MagicOptions() throws FileNotFoundException {
         Random magExists = new Random();
         if (magExists.nextInt(2) == 1) {
-            this.MagicSuffixces = new Magic[386];
+            this.MagicSuffixces = new ArrayList<Magic>();
             magicArrCreator("MagicSuffix.txt");
         } else {
             this.MagicSuffixces = null;
         }
         if (magExists.nextInt(2) == 1) {
-            this.MagicPrefixces = new Magic[372];
+            this.MagicPrefixces = new ArrayList<Magic>();
             magicArrCreator("MagicPrefix.txt");
         } else {
             this.MagicPrefixces = null;
@@ -133,10 +134,25 @@ public class MagicOptions {
             }
             Magic cur = new Magic(findName, findMagCode, findMagMin, findMagMax);
             if (path.equals("MagicPrefix.txt")) {
-                this.MagicPrefixces[i] = cur;
+                this.MagicPrefixces.add(cur);
             } else if (path.equals("MagicSuffix.txt")) {
-                this.MagicSuffixces[i] = cur;
+                this.MagicSuffixces.add(cur);
             }
+        }
+    }
+
+    /**
+     * Returns a Magic object at the index specified
+     *
+     * @param index - The index at which to get the thing
+     * @param type - From which array to get the Magic Entry
+     * @return Magic - the Magic
+     */
+    public Magic get(int index, String type) {
+        if (type.equals("Suffix")) {
+            return MagicSuffixces.get(index);
+        } else {
+            return MagicPrefixces.get(index);
         }
     }
 }

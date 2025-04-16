@@ -6,6 +6,7 @@ package edu.grinnell.csc207.lootgenerator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -61,14 +62,14 @@ public class Monsters {
         }
     }
 
-    Monster[] monArr;
+    ArrayList<Monster> monArr;
 
     /**
-     * Creates an array of Monster Objects from monstats.txt
+     * Creates an ArrayList of Monster Objects from monstats.txt
      *
      */
     public Monsters() throws FileNotFoundException {
-        this.monArr = new Monster[49];
+        this.monArr = new ArrayList<Monster>();
 
         Scanner monSc = new Scanner(new File("monstats.txt"));
         String monInfo;
@@ -95,9 +96,19 @@ public class Monsters {
                 index = monInfo.indexOf((char) 9);
             }
             Monster cur = new Monster(findMonClass, findMonType, findMonLevel, findMonTreasureClass);
-            this.monArr[i] = cur;
+            this.monArr.add(cur);
         }
 
+    }
+    
+    /**
+         * Returns a Monster at the index specified
+         *
+         * @param index - The index at which to get the Monster
+         * @return Monster - the Monster
+         */
+    public Monster get(int index){
+        return monArr.get(index);
     }
 
 }
