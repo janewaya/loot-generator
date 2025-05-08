@@ -1,5 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to 
+ * change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edu.grinnell.csc207.lootgenerator;
@@ -11,7 +12,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- *
  * @author janewaya
  */
 public class MagicOptions {
@@ -73,8 +73,10 @@ public class MagicOptions {
         }
     }
 
-    public ArrayList<Magic> MagicSuffixces;
-    public ArrayList<Magic> MagicPrefixces;
+    public ArrayList<Magic> magicSuffixces;
+    public ArrayList<Magic> magicPrefixces;
+    public int magicSufSize;
+    public int magicPreSize;
 
     /**
      * Creates an object storing between 0 and 2 arrays of magic objects
@@ -83,16 +85,16 @@ public class MagicOptions {
     public MagicOptions() throws FileNotFoundException {
         Random magExists = new Random();
         if (magExists.nextInt(2) == 1) {
-            this.MagicSuffixces = new ArrayList<Magic>();
+            this.magicSuffixces = new ArrayList<Magic>();
             magicArrCreator("MagicSuffix.txt");
         } else {
-            this.MagicSuffixces = null;
+            this.magicSuffixces = null;
         }
         if (magExists.nextInt(2) == 1) {
-            this.MagicPrefixces = new ArrayList<Magic>();
+            this.magicPrefixces = new ArrayList<Magic>();
             magicArrCreator("MagicPrefix.txt");
         } else {
-            this.MagicPrefixces = null;
+            this.magicPrefixces = null;
         }
     }
 
@@ -100,17 +102,12 @@ public class MagicOptions {
      * Stores appropriate magic objects within the created array using
      * MagicPrefix.txt and MagicSuffix.txt
      *
+     * @param path The file
      */
     public void magicArrCreator(String path) throws FileNotFoundException {
         Scanner magSc = new Scanner(new File(path));
         String magInfo;
-        int len;
-        if (path.equals("MagicPrefix.txt")) {
-            len = 372;
-        } else {
-            len = 386;
-        }
-        for (int i = 0; i < len; i++) {
+        while (magSc.hasNextLine()) {
             magInfo = magSc.nextLine();
 
             String findName = "";
@@ -134,9 +131,11 @@ public class MagicOptions {
             }
             Magic cur = new Magic(findName, findMagCode, findMagMin, findMagMax);
             if (path.equals("MagicPrefix.txt")) {
-                this.MagicPrefixces.add(cur);
+                this.magicPrefixces.add(cur);
+                this.magicPreSize++;
             } else if (path.equals("MagicSuffix.txt")) {
-                this.MagicSuffixces.add(cur);
+                this.magicSuffixces.add(cur);
+                this.magicSufSize++;
             }
         }
     }
@@ -150,9 +149,9 @@ public class MagicOptions {
      */
     public Magic get(int index, String type) {
         if (type.equals("Suffix")) {
-            return MagicSuffixces.get(index);
+            return magicSuffixces.get(index);
         } else {
-            return MagicPrefixces.get(index);
+            return magicPrefixces.get(index);
         }
     }
 }

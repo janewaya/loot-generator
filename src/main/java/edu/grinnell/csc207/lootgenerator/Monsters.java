@@ -1,5 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to 
+ * change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edu.grinnell.csc207.lootgenerator;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
  * @author janewaya
  */
 public class Monsters {
@@ -63,6 +63,7 @@ public class Monsters {
     }
 
     ArrayList<Monster> monArr;
+    public int size;
 
     /**
      * Creates an ArrayList of Monster Objects from monstats.txt
@@ -73,7 +74,8 @@ public class Monsters {
 
         Scanner monSc = new Scanner(new File("monstats.txt"));
         String monInfo;
-        for (int i = 0; i < 49; i++) {
+        while (monSc.hasNextLine()) {
+            this.size++;
             monInfo = monSc.nextLine();
 
             String findMonClass = "";
@@ -95,19 +97,20 @@ public class Monsters {
                 monInfo = monInfo.substring(index + 1, monInfo.length());
                 index = monInfo.indexOf((char) 9);
             }
-            Monster cur = new Monster(findMonClass, findMonType, findMonLevel, findMonTreasureClass);
+            Monster cur = new Monster(findMonClass, findMonType, findMonLevel, 
+                                      findMonTreasureClass);
             this.monArr.add(cur);
         }
 
     }
-    
+
     /**
-         * Returns a Monster at the index specified
-         *
-         * @param index - The index at which to get the Monster
-         * @return Monster - the Monster
-         */
-    public Monster get(int index){
+     * Returns a Monster at the index specified
+     *
+     * @param index - The index at which to get the Monster
+     * @return Monster - the Monster
+     */
+    public Monster get(int index) {
         return monArr.get(index);
     }
 

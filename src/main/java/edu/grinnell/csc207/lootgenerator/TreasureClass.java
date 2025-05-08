@@ -1,5 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to 
+ * change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edu.grinnell.csc207.lootgenerator;
@@ -9,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- *
  * @author janewaya
  */
 public class TreasureClass {
@@ -20,7 +20,7 @@ public class TreasureClass {
      */
     public static class TreasureEntry {
 
-        String TC;
+        String tc;
         String[] options;
         TreasureEntry right;
         TreasureEntry left;
@@ -29,14 +29,14 @@ public class TreasureClass {
          * The TreasureEntry Object
          *
          *
-         * @param TC - The Treasure Class of the object
+         * @param tc - The Treasure Class of the object
          * @param options - An array storing the three possible objects within
          * the TC
          * @param right - The right node
          * @param left - the left node
          */
-        public TreasureEntry(String TC, String[] options, TreasureEntry right, TreasureEntry left) {
-            TC = this.TC;
+        public TreasureEntry(String tc, String[] options, TreasureEntry right, TreasureEntry left) {
+            tc = this.tc;
             options = this.options;
             right = this.right;
             left = this.left;
@@ -47,12 +47,12 @@ public class TreasureClass {
          * created)
          *
          *
-         * @param TC - The Treasure Class of the object
+         * @param tc - The Treasure Class of the object
          * @param options - An array storing the three possible objects within
          * the TC
          */
-        public TreasureEntry(String TC, String[] options) {
-            this.TC = TC;
+        public TreasureEntry(String tc, String[] options) {
+            this.tc = tc;
             this.options = options;
             this.right = null;
             this.left = null;
@@ -66,7 +66,7 @@ public class TreasureClass {
          * @return String - The name of the TC
          */
         public String printName(TreasureEntry cur) {
-            return cur.TC;
+            return cur.tc;
         }
     }
 
@@ -80,24 +80,24 @@ public class TreasureClass {
     public TreasureClass() throws FileNotFoundException {
         start = null;
 
-        Scanner TCSc = new Scanner(new File("TreasureClassEx.txt"));
-        String TCScInfo;
-        for (int i = 0; i < 68; i++) {
-            TCScInfo = TCSc.nextLine();
+        Scanner tcSc = new Scanner(new File("TreasureClassEx.txt"));
+        String tcScInfo;
+        while (tcSc.hasNextLine()) {
+            tcScInfo = tcSc.nextLine();
 
             String findTC = "";
             String[] findOptions = new String[3];
-            int index = TCScInfo.indexOf((char) 9);
+            int index = tcScInfo.indexOf((char) 9);
             for (int j = 0; j < 4; j++) {
                 if (j == 0) {
-                    findTC = TCScInfo.substring(0, index);
+                    findTC = tcScInfo.substring(0, index);
                 } else if (j == 3) {
-                    findOptions[j - 1] = TCScInfo.substring(0, TCScInfo.length());
+                    findOptions[j - 1] = tcScInfo.substring(0, tcScInfo.length());
                 } else {
-                    findOptions[j - 1] = TCScInfo.substring(0, index);
+                    findOptions[j - 1] = tcScInfo.substring(0, index);
                 }
-                TCScInfo = TCScInfo.substring(index + 1, TCScInfo.length());
-                index = TCScInfo.indexOf((char) 9);
+                tcScInfo = tcScInfo.substring(index + 1, tcScInfo.length());
+                index = tcScInfo.indexOf((char) 9);
             }
             if (start == null) {
                 start = new TreasureEntry(findTC, findOptions);
@@ -118,14 +118,14 @@ public class TreasureClass {
      * @return String[] - The options tied to the given TC
      */
     private String[] getOptionsH(String name, String[] opts, TreasureEntry cur) {
-        if (cur.TC.equals(name)) {
+        if (cur.tc.equals(name)) {
             opts = cur.options;
         }
         if (cur == null) {
             return opts;
-        } else if (name.compareTo(cur.TC) < 0) {
+        } else if (name.compareTo(cur.tc) < 0) {
             return getOptionsH(name, opts, cur.left);
-        } else if (name.compareTo(cur.TC) > 0) {
+        } else if (name.compareTo(cur.tc) > 0) {
             return getOptionsH(name, opts, cur.right);
         } else {
             return opts;
@@ -141,26 +141,27 @@ public class TreasureClass {
      */
     public String[] getOptions(String name) {
         if (!containsTC(name)) {
-            throw new IllegalStateException("The program has broken. Sorry buddy no more killing today.");
+            throw new IllegalStateException("The program has broken. Sorry buddy"
+                                            + " no more killing today.");
         }
         return getOptionsH(name, null, start);
     }
 
     /**
-     * Helps to determine if the given name is a TC
+     * Helps to determine if the given name is a tc
      *
      *
-     * @param name - The TC we are determining the existence of
+     * @param name - The tc we are determining the existence of
      * @param cur - The current node of the tree
-     * @return boolean - true if name is a TC
+     * @return boolean - true if name is a tc
      */
     private boolean containsTCH(String name, TreasureEntry cur) {
-        if (name.equals(cur.TC)) {
+        if (name.equals(cur.tc)) {
             return true;
-        } else if ((name.compareTo(cur.TC) < 0 && cur.left == null)
-                || name.compareTo(cur.TC) > 0 && cur.right == null) {
+        } else if ((name.compareTo(cur.tc) < 0 && cur.left == null)
+                || name.compareTo(cur.tc) > 0 && cur.right == null) {
             return false;
-        } else if (name.compareTo(cur.TC) < 0) {
+        } else if (name.compareTo(cur.tc) < 0) {
             return containsTCH(name, cur.left);
         } else {
             return containsTCH(name, cur.right);
@@ -168,7 +169,7 @@ public class TreasureClass {
     }
 
     /**
-     * Determines if the given name is a TC
+     * Determines if the given name is a tc
      *
      *
      * @param name - The TC we are determining the existence of
@@ -190,9 +191,9 @@ public class TreasureClass {
     private TreasureEntry putH(String name, String[] options, TreasureEntry cur) {
         if (cur == null) {
             return new TreasureEntry(name, options);
-        } else if (name.compareTo(cur.TC) < 0) {
+        } else if (name.compareTo(cur.tc) < 0) {
             cur.left = putH(name, options, cur.left);
-        } else if (name.compareTo(cur.TC) > 0) {
+        } else if (name.compareTo(cur.tc) > 0) {
             cur.right = putH(name, options, cur.right);
         }
         return cur;

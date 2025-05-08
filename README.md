@@ -1,5 +1,10 @@
 # Project: Loot Generator
 
+# Changes:
+ * Fixed Checkstyles
+ * Made so it can be applied to any file regardless of size.
+   (changes to while hasNextLine(), creating size variables)
+
 Authors: Alex Janeway
 
 ## Resources
@@ -8,8 +13,15 @@ Authors: Alex Janeway
 *   Java 17
 *   TTAP: Data Structures- Lab Manual, Loot Generator, (https://osera.cs.grinnell.edu/ttap/data-structures-labs/loot-generator.html)
 *   Java Oracle (specifically the Scanner, Random, and Object pages)
+*   David Stroud (comp sci tutor) reminded me how Scanner.hasNextLine() + Scanner.reset() work.
 
 ## Revision Log
+
+commit b660f8e658cc2563c6469421717a07d06973a8fd (HEAD -> main, origin/main, origin/HEAD)
+Author: Janeway <janewaya@mauchly.cs.grinnell.edu>
+Date:   Tue Apr 15 20:09:11 2025 -0500
+
+    Remembered test cases + made arrays into ArrayLists
 
 commit 2975d3102560f645097b2ea618506941239f8262 (HEAD -> main, origin/main, origin/HEAD)
 Author: Janeway <janewaya@mauchly.cs.grinnell.edu>

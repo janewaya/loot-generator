@@ -31,7 +31,7 @@ public class Tests {
     @Test
     public void firstSufContained() throws FileNotFoundException {
         MagicOptions test = new MagicOptions();
-        if (test.MagicSuffixces != null) {
+        if (test.magicSuffixces != null) {
             String Jack = test.get(0, "Suffix").getName();
             assertEquals(Jack, "of Warming");
         }
@@ -40,7 +40,7 @@ public class Tests {
     @Test
     public void lastSufContained() throws FileNotFoundException {
         MagicOptions test = new MagicOptions();
-        if (test.MagicSuffixces != null) {
+        if (test.magicSuffixces != null) {
             String Jack = test.get(385, "Suffix").getName();
             assertEquals(Jack, "of Malice");
         }
@@ -49,7 +49,7 @@ public class Tests {
     @Test
     public void firstPreContained() throws FileNotFoundException {
         MagicOptions test = new MagicOptions();
-        if (test.MagicPrefixces != null) {
+        if (test.magicPrefixces != null) {
             String Jack = test.get(0, "Prefix").getName();
             assertEquals(Jack, "Sturdy");
         }
@@ -58,7 +58,7 @@ public class Tests {
     @Test
     public void lastPreContained() throws FileNotFoundException {
         MagicOptions test = new MagicOptions();
-        if (test.MagicPrefixces != null) {
+        if (test.magicPrefixces != null) {
             String Jack = test.get(371, "Prefix").getName();
             assertEquals(Jack, "Aureolin");
         }

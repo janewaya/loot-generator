@@ -6,13 +6,16 @@ import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Main Class- Runs LootGenerator
+ */
 public class LootGenerator {
 
     /**
      * Runs the loot generator program; Takes in user input to generate a
      * progression from monster to loot to how good the loot is.
      *
-     * @param String[] args Optional (unused) command line input
+     * @param args Optional (unused) command line input
      */
     public static void main(String[] args) throws FileNotFoundException {
 
@@ -39,42 +42,42 @@ public class LootGenerator {
 
         while (replay) {
 
-            Monster Paul = pickMonster();
-            String TreasureClass = fetchTreasureClass(Paul);
-            String Loot = generateBaseItem(TreasureClass);
+            Monster myBoiPaul = pickMonster();
+            String treasureClass = fetchTreasureClass(myBoiPaul);
+            String loot = generateBaseItem(treasureClass);
 
-            Magic Suffix = generateAffix("Suffix");
+            Magic suffix = generateAffix("Suffix");
             String sufStr = "";
             int sufVal = 0;
             String sufCode = "";
 
-            if (Suffix != null) {
-                sufStr = Suffix.getName();
-                sufVal = Suffix.getMagVal();
-                sufCode = Suffix.getMagCode();
+            if (suffix != null) {
+                sufStr = suffix.getName();
+                sufVal = suffix.getMagVal();
+                sufCode = suffix.getMagCode();
             }
 
-            Magic Prefix = generateAffix("Prefix");
+            Magic prefix = generateAffix("Prefix");
 
             String preStr = "";
             int preVal = 0;
             String preCode = "";
 
-            if (Prefix != null) {
-                preStr = Prefix.getName();
-                preVal = Prefix.getMagVal();
-                preCode = Prefix.getMagCode();
+            if (prefix != null) {
+                preStr = prefix.getName();
+                preVal = prefix.getMagVal();
+                preCode = prefix.getMagCode();
             }
 
-            System.out.println("\n\nFighting " + Paul.toString() + "...");
-            System.out.println("You have slain " + Paul.toString() + "!");
-            System.out.println(Paul.toString() + " dropped:\n");
+            System.out.println("\n\nFighting " + myBoiPaul.toString() + "...");
+            System.out.println("You have slain " + myBoiPaul.toString() + "!");
+            System.out.println(myBoiPaul.toString() + " dropped:\n");
             if (preStr != "") {
-                System.out.println(preStr + " " + Loot + " " + sufStr);
+                System.out.println(preStr + " " + loot + " " + sufStr);
             } else {
-                System.out.println(Loot + " " + sufStr);
+                System.out.println(loot + " " + sufStr);
             }
-            System.out.println("Defense: " + generateBaseStats(Loot));
+            System.out.println("Defense: " + generateBaseStats(loot));
             if (preVal != 0) {
                 System.out.println(preCode + ": " + preVal);
             }
@@ -87,7 +90,8 @@ public class LootGenerator {
                 if (fool < 7) {
                     System.out.println("Please enter 'y' or 'n'- thanks!");
                 } else {
-                    System.out.println("I'm not judging. But get it together man. 'y' or 'n' please.");
+                    System.out.println("I'm not judging. But get it together man."
+                                       + " 'y' or 'n' please.");
                 }
                 fool++;
                 keepGoing = violence.nextLine().toLowerCase();
@@ -96,7 +100,6 @@ public class LootGenerator {
                 System.out.println("Play again soon!");
                 replay = false;
             }
-
         }
     }
 
@@ -107,10 +110,10 @@ public class LootGenerator {
      * @return Monster - returns the monster the user is killing
      */
     public static Monster pickMonster() throws FileNotFoundException {
-        Monsters Buddies = new Monsters();
+        Monsters buddies = new Monsters();
         Random monsterEncounter = new Random();
-        int jumpScare = monsterEncounter.nextInt(49);
-        return Buddies.monArr.get(jumpScare);
+        int jumpScare = monsterEncounter.nextInt(buddies.size);
+        return buddies.monArr.get(jumpScare);
     }
 
     /**
@@ -120,8 +123,8 @@ public class LootGenerator {
      * @return String - Returns the stored TC of the Monster
      */
     public static String fetchTreasureClass(Monster friend) throws FileNotFoundException {
-        String Loot = friend.getMonTreasureClass();
-        return Loot;
+        String loot = friend.getMonTreasureClass();
+        return loot;
     }
 
     /**
@@ -131,11 +134,11 @@ public class LootGenerator {
      * @return String - Returns the name of the looted object
      */
     public static String generateBaseItem(String lootClass) throws FileNotFoundException {
-        TreasureClass Hoard = new TreasureClass();
-        String[] coolStuff = Hoard.getOptions(lootClass);
+        TreasureClass hoard = new TreasureClass();
+        String[] coolStuff = hoard.getOptions(lootClass);
         Random whichLoot = new Random();
         int treasure = whichLoot.nextInt(3);
-        if (Hoard.containsTC(coolStuff[treasure])) {
+        if (hoard.containsTC(coolStuff[treasure])) {
             return generateBaseItem(coolStuff[treasure]);
         }
 
@@ -146,15 +149,15 @@ public class LootGenerator {
     /**
      * Outputs a loot item of specified lootClass
      *
-     * @param Loot - Takes in the looted object
+     * @param loot - Takes in the looted object
      * @return int - Returns the defense level of the looted object
      */
-    public static int generateBaseStats(String Loot) throws FileNotFoundException {
+    public static int generateBaseStats(String loot) throws FileNotFoundException {
         Armory deathUponYeWhoSteal = new Armory();
-        int index = Math.abs(Loot.hashCode() % 202);
-        while (!deathUponYeWhoSteal.allArmor[index].getName().equals(Loot)) {
+        int index = Math.abs(loot.hashCode() % deathUponYeWhoSteal.size);
+        while (!deathUponYeWhoSteal.allArmor[index].getName().equals(loot)) {
             index++;
-            if (index == 202) {
+            if (index == deathUponYeWhoSteal.size) {
                 index = 0;
             }
         }
@@ -169,19 +172,19 @@ public class LootGenerator {
      * Suffix or Prefix.
      */
     public static Magic generateAffix(String type) throws FileNotFoundException {
-        MagicOptions Abracadabra = new MagicOptions();
+        MagicOptions abracadabra = new MagicOptions();
         if (type.equals("Suffix")) {
-            if (Abracadabra.MagicSuffixces != null) {
+            if (abracadabra.magicSuffixces != null) {
                 Random suffix = new Random();
-                int newSuf = suffix.nextInt(386);
-                return Abracadabra.MagicSuffixces.get(newSuf);
+                int newSuf = suffix.nextInt(abracadabra.magicSufSize);
+                return abracadabra.magicSuffixces.get(newSuf);
             }
             return null;
         } else {
-            if (Abracadabra.MagicPrefixces != null) {
+            if (abracadabra.magicPrefixces != null) {
                 Random prefix = new Random();
-                int newPre = prefix.nextInt(372);
-                return Abracadabra.MagicPrefixces.get(newPre);
+                int newPre = prefix.nextInt(abracadabra.magicPreSize);
+                return abracadabra.magicPrefixces.get(newPre);
             }
             return null;
         }
